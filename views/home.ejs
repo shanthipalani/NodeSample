@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p><a href="/contact">Contact us</a></p>
+
+    <input name="year" class="year" id="dob_year" placeholder="Enter year" />
+    <button class="btn">Submit</button>
+
+  </body>
+
+  <script src="/js/jquery-3.3.1.js"></script>
+  <script>
+  $(document).ready(function(){
+    $(".btn").click(function(){
+        //alert("Clicked button");
+        //Input request value initialisation
+        var year= $('#dob_year').val();
+
+        if( year == ''){
+        	alert("Year should not be empty");
+        }else{
+	        var data = {};
+	        data.year = year;
+	        console.log("Year entered", data);
+	        
+	        $.ajax({
+	            url : "/check/eligibility",
+	            type : "POST",
+	            dataType: "json",
+	            data : data,
+	            success : function(datam) {
+	            	console.log(datam);	            	
+	            	if(datam.flag){
+	            		alert("Eligible for voting");
+	            	}else{
+	            		alert("Not eligible for voting"); 
+	            	}
+	               
+	            },
+	            error : function() {
+	                alert("Failiuer");
+	            }
+	        });
+        }
+        
+    });
+
+    
+    
+
+  });
+  </script>
+</html>
