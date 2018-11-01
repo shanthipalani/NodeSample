@@ -3,27 +3,42 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/css/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
+<style>
+    div {
+        margin:20px 0px;
+    }
+</style>
 <body>
 <h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
 
+<div>
+    <label>Name</label>
+    <input name="name" class="name" id="name" placeholder="Enter name" />
+</div>
+<div>
+    <label>Breed</label>
+    <input name="breed" class="breed" id="breed" placeholder="Enter breedr" />
+</div>
+<div>
+    <label>Age</label>
+    <input name="age" class="age" id="age" placeholder="Enter Age" />
+</div>
+<div>
+    <label>Sex(M/F)</label>
+    <input name="sex" class="sex" id="sex" placeholder="Sex" />
+</div>
 
-<label>Name</label><input name="name" class="name" id="name" placeholder="Enter name" />
-<BR>
-<label>Breed</label><input name="breed" class="breed" id="breed" placeholder="Enter breedr" />
-<BR>
-
-<label>Deaprtment</label><input name="age" class="age" id="age" placeholder="Enter Age" />
-<BR>
-<label>Roll number</label><input name="sex" class="sex" id="sex" placeholder="Sex" />
-<BR>
-<button class="submit_detail">Submit</button>
-
+<div>
+    <button class="submit_detail">Submit</button>
+</div>
 </body>
 
 <script src="/js/jquery-3.3.1.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script>
+
     $(document).ready(function(){
         $(".submit_detail").click(function(){
 

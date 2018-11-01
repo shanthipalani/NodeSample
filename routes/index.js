@@ -3,6 +3,10 @@ var router = express.Router();
 
 var db = require('./queries');
 
+/*
+*https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/
+* code sample reference
+*/
 
 router.get('/api/puppies', db.getAllPuppies);
 router.get('/api/puppies/:id', db.getSinglePuppy);
