@@ -33,6 +33,17 @@
 <div>
     <button class="submit_detail">Submit</button>
 </div>
+<h1>Search</h1>
+<div>
+    <label>Enter search text</label>
+    <input name="search" class="search" id="search" placeholder="Search" />
+</div>
+<div class="search-result">
+
+</div>
+<div>
+    <button class="submit_search">Submit</button>
+</div>
 </body>
 
 <script src="/js/jquery-3.3.1.js"></script>
@@ -40,6 +51,37 @@
 <script>
 
     $(document).ready(function(){
+
+        $(".submit_search").click(function(){
+            var id = $('#search').val();
+            if(id=='' ){
+                alert("Enter search ID");
+            }else{
+                var data = {};
+                data.id = id;
+                console.log("search entered", data);
+                $.ajax({
+                    url : "/search/puppies",
+                    type : "POST",
+                    dataType: "json",
+                    data : data,
+                    success : function(datan) {
+                        console.log(datan);
+                        if(datan.flag){
+                            $('#search-result').html(datan.response);
+                            alert("Data inserted successfully");
+                        }else{
+                            alert("No search result found");
+                        }
+                    },
+                    error : function() {
+                        alert("Something went wrong");
+                    }
+                });
+            }
+
+        });
+
         $(".submit_detail").click(function(){
 
             //Input request value initialisation
@@ -76,7 +118,6 @@
                         }else{
                             alert("Data not inserted. Try again");
                         }
-
                     },
                     error : function() {
                         alert("Something went wrong");
@@ -90,5 +131,6 @@
 
 
     });
+
 </script>
 </html>
