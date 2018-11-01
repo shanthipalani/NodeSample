@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+
+<label>Name</label><input name="name" class="name" id="name" placeholder="Enter name" />
+<BR>
+<label>Breed</label><input name="breed" class="breed" id="breed" placeholder="Enter breedr" />
+<BR>
+
+<label>Deaprtment</label><input name="age" class="age" id="age" placeholder="Enter Age" />
+<BR>
+<label>Roll number</label><input name="sex" class="sex" id="sex" placeholder="Sex" />
+<BR>
+<button class="submit_detail">Submit</button>
+
+</body>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".submit_detail").click(function(){
+
+            //Input request value initialisation
+
+            var name = $('#name').val();
+            var breed= $('#breed').val();
+            var age = $('#age').val();
+            var sex = $('#sex').val();
+
+            if( breed == '' || name =='' || age =='' || sex == ''){
+                alert("Enter all the details");
+            }else{
+                var data = {};
+                data.breed = breed;
+                data.name = name;
+                data.age = age;
+                data.sex = sex;
+
+                console.log("Year entered", data);
+
+                $.ajax({
+                    url : "/api/puppies",
+                    type : "POST",
+                    dataType: "json",
+                    data : data,
+                    success : function(datam) {
+                        console.log(datam);
+                        if(datam.flag){
+                            $('#name').val('');
+                            $('#breed').val('');
+                            $('#sex').val('');
+                            $('#age').val('');
+                            alert("Data inserted successfully");
+                        }else{
+                            alert("Data not inserted. Try again");
+                        }
+
+                    },
+                    error : function() {
+                        alert("Something went wrong");
+                    }
+                });
+            }
+
+        });
+
+
+
+
+    });
+</script>
+</html>

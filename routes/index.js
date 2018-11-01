@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+var db = require('./queries');
+
+
+router.get('/api/puppies', db.getAllPuppies);
+router.get('/api/puppies/:id', db.getSinglePuppy);
+router.post('/api/puppies', db.createPuppy);
+router.put('/api/puppies/:id', db.updatePuppy);
+router.delete('/api/puppies/:id', db.removePuppy);
+
+
 const check = function(arg,callback){
 		if(typeof arg !== 'number'){
 			return callback('Not a num');
@@ -22,6 +32,12 @@ router.get('/', function(req, res, next) {
   	{ title: 'Voting Eligibility'});
 });
 
+/* GET home page. */
+router.get('/puppies', function(req, res, next) {
+    res.render('puppies',
+        { title: 'Puppy Record insert'});
+});
+
 //Contact us page 
 router.get('/contact', function(req, res, next) {
   res.render('contact', 
@@ -29,6 +45,7 @@ router.get('/contact', function(req, res, next) {
   	   name:'Shanthi',
   	   age:'25' });
 });
+
 
 /* Checking vote eligibility*/
 router.post('/check/eligibility', function(req, res, next) {
